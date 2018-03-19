@@ -9,7 +9,8 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    getSearchResult: {}
+    getSearchResult: {},
+    totalGitSearchResults: null
   },
   getters,
   mutations,

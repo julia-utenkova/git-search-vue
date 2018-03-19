@@ -5,7 +5,7 @@
         <div class="row justify-content-md-center">
           <div class="col-md-6 col-md-auto">
 
-              <div class="input-group mb-3">
+              <div class="input-group mb-3" style="margin-top: 30px">
                   <input type="text" class="form-control"
                          placeholder="Start your Git search..."
                          aria-label="Recipient's username"
@@ -19,7 +19,13 @@
                   </div>
               </div>
 
-
+            <div v-if="totalGitSearchResults < 1">
+                <div class="item-wrapper">
+                    <div class="item-heading">
+                        <h1>No results are found...</h1>
+                    </div>
+                </div>
+            </div>
             <git-item v-for="result in gitSearchResult.items" :key="result.id" :result="result"></git-item>
           </div>
         </div>
@@ -47,6 +53,9 @@ export default {
   computed: {
     gitSearchResult () {
       return this.$store.state.getSearchResult
+    },
+    totalGitSearchResults () {
+      return this.$store.state.totalGitSearchResults
     }
   },
 
@@ -83,38 +92,4 @@ export default {
 
 <style lang="scss">
     @import '~bootstrap/scss/bootstrap.scss';
-/*body {*/
-  /*margin: 0;*/
-/*}*/
-
-/*#app {*/
-  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
-  /*-webkit-font-smoothing: antialiased;*/
-  /*-moz-osx-font-smoothing: grayscale;*/
-  /*color: #2c3e50;*/
-/*}*/
-
-/*main {*/
-  /*text-align: center;*/
-  /*margin-top: 40px;*/
-/*}*/
-
-/*header {*/
-  /*margin: 0;*/
-  /*height: 56px;*/
-  /*padding: 0 16px 0 24px;*/
-  /*background-color: #35495E;*/
-  /*color: #f1f1f1;*/
-/*}*/
-
-/*header span {*/
-  /*display: block;*/
-  /*position: relative;*/
-  /*font-size: 20px;*/
-  /*line-height: 1;*/
-  /*letter-spacing: .02em;*/
-  /*font-weight: 400;*/
-  /*box-sizing: border-box;*/
-  /*padding-top: 16px;*/
-/*}*/
 </style>
