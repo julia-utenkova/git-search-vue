@@ -2,22 +2,27 @@
   <div id="app">
 
     <div class="container">
-      <div class="col-md-12">
-        <div class="search-module form-inline">
+        <div class="row justify-content-md-center">
+          <div class="col-md-6 col-md-auto">
 
-          <div class="form-group row">
-            <label for="gitSearchValue" class="col-sm-3 col-form-label">Git Search</label>
-            <div class="col-sm-5">
-              <input type="email" class="form-control" id="gitSearchValue" placeholder="Email">
-            </div>
-            <div class="col-sm-4">
-              <button type="button" class="btn btn-primary mb-2" id="gitSearchBtn">Search</button>
-            </div>
+              <div class="input-group mb-3">
+                  <input type="text" class="form-control"
+                         placeholder="Start your Git search..."
+                         aria-label="Recipient's username"
+                         aria-describedby="basic-addon2"
+                         v-model="gitSearchValue"
+                         v-on:keyup.enter="startGitSearch(gitSearchValue)"
+                  >
+
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" @click="startGitSearch(gitSearchValue)">Search</button>
+                  </div>
+              </div>
+
+
+            <git-item v-for="result in gitSearchResult.items" :key="result.id" :result="result"></git-item>
           </div>
-
         </div>
-        <git-item></git-item>
-      </div>
     </div>
 
   </div>
@@ -28,6 +33,12 @@ import GitItem from './components/GitItem'
 
 export default {
   name: 'app',
+
+  data () {
+    return {
+      gitSearchValue: ''
+    }
+  },
 
   components: {
     'git-item': GitItem
@@ -51,11 +62,15 @@ export default {
 
       return generatedUrl
     },
-    getGitSearchResult () {
+    getGitSearchResult (query) {
       let payload = {
-        url: this.getURL()
+        url: this.getURL(query)
       }
       this.$store.dispatch('getGitSearchResult', payload)
+    },
+    startGitSearch (query) {
+      this.getGitSearchResult(query)
+      this.gitSearchValue = ''
     }
   },
 
@@ -66,7 +81,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+    @import '~bootstrap/scss/bootstrap.scss';
 /*body {*/
   /*margin: 0;*/
 /*}*/

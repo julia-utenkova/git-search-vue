@@ -1,11 +1,18 @@
 <template>
-  <div class="hello">
-      <h1>asd</h1>
-  </div>
+    <a :href="result.html_url" class="item-wrapper">
+        <div class="item-heading">
+            <h1>{{ result.name }}</h1>
+            <span>{{ result.updated_at }}</span>
+        </div>
+        <hr>
+        <div class="item-info">
+            <p>{{ result.description }}</p>
+        </div>
+    </a>
 </template>
-
 <script>
 export default {
+  props: ['result'],
   name: 'hello',
   data () {
     return {
@@ -16,22 +23,39 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-/*h1, h2 {*/
-  /*font-weight: normal;*/
-/*}*/
+<style lang="scss">
+    .item {
+    &-wrapper {
+         display: inline-block;
+         width: 100%;
+         background: rgb(249, 249, 249);
+         padding: 14px;
+         margin-bottom: 23px;
 
-/*ul {*/
-  /*list-style-type: none;*/
-  /*padding: 0;*/
-/*}*/
+         color: black;
 
-/*li {*/
-  /*display: inline-block;*/
-  /*margin: 0 10px;*/
-/*}*/
+    &:hover {
+         text-decoration: none;
+         color: black;
+         background: rgb(239, 239, 239);
+     }
 
-/*a {*/
-  /*color: #35495E;*/
-/*}*/
+    hr {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    }
+
+    &-heading {
+    h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+
+    span {
+        font-size: 13px;
+        color: grey;
+    }
+    }
+    }
 </style>
